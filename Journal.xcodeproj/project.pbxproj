@@ -17,6 +17,7 @@
 		B0C78FB225F9D20F0069C3A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0C78FB125F9D20F0069C3A1 /* GoogleService-Info.plist */; };
 		B0C78FC525F9D2C30069C3A1 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C78FC425F9D2C30069C3A1 /* Note.swift */; };
 		B0C78FC825F9D3210069C3A1 /* NotesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C78FC725F9D3210069C3A1 /* NotesModel.swift */; };
+		B0C78FCD25F9DC8C0069C3A1 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C78FCC25F9DC8C0069C3A1 /* NoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		B0C78FB125F9D20F0069C3A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B0C78FC425F9D2C30069C3A1 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		B0C78FC725F9D3210069C3A1 /* NotesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesModel.swift; sourceTree = "<group>"; };
+		B0C78FCC25F9DC8C0069C3A1 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		CD0942C8C47A2F3131730EC2 /* Pods-Journal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Journal.debug.xcconfig"; path = "Target Support Files/Pods-Journal/Pods-Journal.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				B0C78F9A25F9D17F0069C3A1 /* ViewController.swift */,
+				B0C78FCC25F9DC8C0069C3A1 /* NoteViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				B0C78F9725F9D17F0069C3A1 /* AppDelegate.swift in Sources */,
 				B0C78F9925F9D17F0069C3A1 /* SceneDelegate.swift in Sources */,
 				B0C78FC525F9D2C30069C3A1 /* Note.swift in Sources */,
+				B0C78FCD25F9DC8C0069C3A1 /* NoteViewController.swift in Sources */,
 				B0C78FC825F9D3210069C3A1 /* NotesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

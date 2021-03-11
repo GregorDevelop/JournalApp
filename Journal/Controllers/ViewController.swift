@@ -18,13 +18,31 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set delegate and datasource for the table
         tableView.dataSource = self
         tableView.delegate = self
         
         notesModel.getNotes()
+        
+        // Set self as the delegate for the notes model
         notesModel.delegate = self
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let noteVC = segue.destination as! NoteViewController
+        
+        // If the user has selected a row, transition to note vc
+        if tableView.indexPathForSelectedRow != nil {
+           
+            // Set the note of the note vc
+            noteVC.selectedNote = notes[tableView.indexPathForSelectedRow!.row]
+            
+            // Deselect the selected row so that it doesn't interfere with new note creation
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+        }
+        
+        noteVC.notesModel = notesModel
+    }
 
     
 }

@@ -14,6 +14,14 @@ protocol NotesModelProtocol {
 
 class NotesModel {
     
+    var listener: ListenerRegistration?
+    
+    deinit {
+        
+        // Unregister database listener
+        listener?.remove()
+    }
+    
     var delegate: NotesModelProtocol?
     
     func getNotes() {
@@ -22,7 +30,7 @@ class NotesModel {
         let db = Firestore.firestore()
         
         // Get all the notes
-        db.collection("notes").getDocuments { (snapshot, error) in
+        listener = db.collection("notes").order(by: "lastUpdateAt").addSnapshotListener { (snapshot, error) in
             
             if error == nil && snapshot != nil {
                 
@@ -47,6 +55,34 @@ class NotesModel {
             }
         }
         
+    }
+    
+    func deleteNote(_ selectedNote: Note) {
+        let db = Firestore.firestore()
+        
+        db.collection("notes").document(selectedNote.docId).delete()
+    }
+    
+    
+    func saveNote(_ selectedNote: Note) {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("notes").document(selectedNote.docId).setData(noteToDict(selectedNote))
+    }
+    
+    func noteToDict(_ selectedNote: Note) -> [String: Any] {
+        
+        var dict = [String: Any]()
+        
+        dict["docId"] = selectedNote.docId
+        dict["title"] = selectedNote.title
+        dict["body"] = selectedNote.body
+        dict["isStarred"] = selectedNote.isStarred
+        dict["createdAt"] = selectedNote.createdAt
+        dict["lastUpdateAt"] = selectedNote.lastUpdateAt
+        
+        return dict
     }
     
 }
