@@ -9,6 +9,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var isFiltered = false
+    
+    @IBOutlet weak var starButton: UIBarButtonItem!
+    
+    
     var notesModel = NotesModel()
     var notes = [Note]()
     
@@ -22,10 +27,12 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        // Retrieve all notes
         notesModel.getNotes()
         
         // Set self as the delegate for the notes model
         notesModel.delegate = self
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,9 +48,31 @@ class ViewController: UIViewController {
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
         
+        // Whether its a new note or a selected note, we still want to pass through the notes model
         noteVC.notesModel = notesModel
     }
+    
+    func setStarState() {
+        let imageName = isFiltered ? "star.fill" : "star"
+        starButton.image = UIImage(systemName: imageName)
+    }
 
+    @IBAction func starButtonFilteredTapped(_ sender: Any) {
+        
+        // Toggle the star filter status
+        isFiltered.toggle()
+
+        // Run the query
+        if isFiltered {
+            notesModel.getNotes(true)
+        } else {
+            notesModel.getNotes()
+        }
+
+        // Update the star button
+        setStarState()
+    }
+    
     
 }
 
@@ -71,6 +100,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ViewController: NotesModelProtocol {
     func notesRetrieved(notes: [Note]) {
+        
+        // Set notes property and refresh the table view
         self.notes = notes
         tableView.reloadData()
     }

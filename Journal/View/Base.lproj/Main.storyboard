@@ -69,6 +69,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="zP2-Xv-Tud">
+                        <barButtonItem key="leftBarButtonItem" image="star" catalog="system" id="Noj-tl-kBg">
+                            <connections>
+                                <action selector="starButtonFilteredTapped:" destination="BYZ-38-t0r" id="yd1-jD-zpR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7py-Pd-jhS">
                             <connections>
                                 <segue destination="drS-YV-l8u" kind="presentation" id="8TF-02-le1"/>
@@ -76,6 +81,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="starButton" destination="Noj-tl-kBg" id="BFi-AB-bA0"/>
                         <outlet property="tableView" destination="Z3j-fn-3YL" id="XYE-XE-STV"/>
                     </connections>
                 </viewController>
@@ -137,6 +143,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66c-w9-qGp">
                                                 <rect key="frame" x="352" y="0.0" width="22" height="40"/>
                                                 <state key="normal" image="star" catalog="system"/>
+                                                <connections>
+                                                    <action selector="starButtonTapped:" destination="drS-YV-l8u" eventType="touchUpInside" id="xC9-OG-E6T"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -154,6 +163,7 @@
                     </view>
                     <connections>
                         <outlet property="bodyTextView" destination="23C-fF-eo5" id="eaQ-Ue-SEN"/>
+                        <outlet property="starButton" destination="66c-w9-qGp" id="tkL-bt-7b1"/>
                         <outlet property="titleTextField" destination="spb-zL-IqV" id="Enw-uK-rgK"/>
                     </connections>
                 </viewController>

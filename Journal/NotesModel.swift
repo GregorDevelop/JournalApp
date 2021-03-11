@@ -13,6 +13,8 @@ protocol NotesModelProtocol {
 }
 
 class NotesModel {
+
+    var delegate: NotesModelProtocol?
     
     var listener: ListenerRegistration?
     
@@ -22,15 +24,22 @@ class NotesModel {
         listener?.remove()
     }
     
-    var delegate: NotesModelProtocol?
-    
-    func getNotes() {
+    func getNotes(_ isFiltered: Bool = false) {
+        // Detach any listener
+        listener?.remove()
         
         // Get a reference to the database
         let db = Firestore.firestore()
         
+        var query: Query = db.collection("notes").order(by: "lastUpdateAt")
+        
+        // If we're only looking for starred notes, update the query
+        if isFiltered {
+            query = query.whereField("isStarred", isEqualTo: true)
+        }
+        
         // Get all the notes
-        listener = db.collection("notes").order(by: "lastUpdateAt").addSnapshotListener { (snapshot, error) in
+        listener = query.addSnapshotListener { (snapshot, error) in
             
             if error == nil && snapshot != nil {
                 
@@ -85,4 +94,10 @@ class NotesModel {
         return dict
     }
     
+    func updateFaveState(_ selectedNote: Note) {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("notes").document(selectedNote.docId).updateData(["isStarred": selectedNote.isStarred])
+    }
 }
