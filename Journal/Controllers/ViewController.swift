@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var notesModel = NotesModel()
+    var notes = [Note]()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,6 +21,8 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        notesModel.getNotes()
+        notesModel.delegate = self
     }
 
 
@@ -27,7 +31,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return notes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,10 +40,21 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         // Customize cell
 
         let titleLabel = cell.viewWithTag(1) as? UILabel
+        titleLabel?.text = notes[indexPath.row].title
         
         let bodyLabel = cell.viewWithTag(2) as? UILabel
+        bodyLabel?.text = notes[indexPath.row].body
         
         return cell
+    }
+        
+}
+
+
+extension ViewController: NotesModelProtocol {
+    func notesRetrieved(notes: [Note]) {
+        self.notes = notes
+        tableView.reloadData()
     }
     
     

@@ -14,6 +14,6 @@ struct Note {
     var title: String
     var body: String
     var isStarred: Bool
-    var createdAt: String
-    var lastUpdateAt: String
+    var createdAt: Date
+    var lastUpdateAt: Date
 }
